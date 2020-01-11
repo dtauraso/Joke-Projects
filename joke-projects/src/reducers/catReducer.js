@@ -7,7 +7,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Loader from 'react-loader-spinner';
-
+import {startProcess} from '../actions/catActions'
 const CatText = styled.p`
 
     font-family: fantasy
@@ -34,7 +34,7 @@ const CatImage = styled.img`
 //         prompt: <p>Go ahead! Fetch a Cat</p>
 //     }
 // }
-const fetchCatStart = (state, action) => {
+export const fetchCatStart = (state, action, currentState) => {
 
     return {
         ...state,
@@ -48,8 +48,101 @@ const fetchCatStart = (state, action) => {
 // component
     // actions(programming 'buttons')
         // visitor(start, end) traversal
+
+// send this to TL on saturday(marina and leslie)
+// It's more of a quick app where practical jokes can be added over time
+// It's not the same as my state machine printing states out program.  I'm still working on that.
+// Here is the start of my jokes app. https://github.com/dtauraso/Joke-Projects.  It treats the reducers as components, reducers, and states (from state machines).  It’s intended to have hierarchies of states to help control the timeline of component changes as the user goes through the app.  Any feedback is welcome.  I’m just letting you know early.
+// I'm aware there are no jokes setup yet.
 // component state reducer functions
-const fetchCatSuccess = (state, action) => {
+export const fetchCatSuccess = (state, action, currentState) => {
+
+    const doSomething = () => {
+        console.log('test')
+    }
+    return {
+        ...state,
+
+        error: '',
+
+        htmlMessage: <div>
+            <CatDiv>
+                <CatImage src={action.payload}/>
+            </CatDiv>
+            <p>Ta Da !!</p>
+            <button onClick={() => doSomething()}>test me</button>
+        </div>
+    }
+}
+export const fetchCatFailure = (state, action, currentState) => {
+    return {
+        ...state,
+        error: action.payload,
+        htmlMessage: 
+        <div>
+            <CatText>Try again! Fetch a Cat</CatText>
+
+        </div>
+
+    }
+}
+const fakeInfiniteLoopButton = styled.button`
+
+    margin: 100px auto;
+
+`
+// component that renders whatever redux returns?
+// mini-components nested inside reducer
+export const fakeAppCrash = (state, action, currentState) => {
+
+    let one = currentState[0]
+    let two = currentState[1]
+    const doSomething = () => {
+        console.log('test')
+    }
+
+    console.log('getting run')
+    console.log(state)
+    // if I had a bunch of state name keys that map to different mini-components
+    return {
+        ...state,
+        htmlMessage:
+        <div>
+            <button onClick={() => {}}
+            >Crash Program</button>
+        </div>,
+        myCurrentState: currentState,
+        // maps to 1 page at a point in tme
+        myCustomKeys: {
+            [one] : {
+                [two]: {
+                    // have only 1 key here
+                    header: <div>
+                        <CatText>first one</CatText>
+                        <p>Ta Da !!</p>
+                        <button onClick={() => doSomething()}>test me</button>
+                    </div>,
+                    nextPart: <div>
+                        <p>Ta Da !!</p>
+                        <button onClick={() => doSomething()}>test me</button>
+
+                    </div>
+        
+                    
+                }
+               
+    
+                
+            }
+        }
+    }
+}
+
+const testingFunction = (state, action, currentState) => {
+
+    const doSomething = () => {
+        console.log('test')
+    }
     
     return {
         ...state,
@@ -61,21 +154,14 @@ const fetchCatSuccess = (state, action) => {
                 <CatImage src={action.payload}/>
             </CatDiv>
             <p>Ta Da !!</p>
-
+            <button onClick={() => doSomething()}>test me</button>
         </div>
     }
 }
-const fetchCatFailure = (state, action) => {
-    return {
-        ...state,
-        error: action.payload,
-        htmlMessage: 
-        <div>
-            <CatText>Try again! Fetch a Cat</CatText>
 
-        </div>
-    }
-}
+let startOne = 'start'
+let startTwo = '0'
+
 
 // start state
 const initialState = {
@@ -83,17 +169,44 @@ const initialState = {
     error: '',
     htmlMessage:
         <div>
-            <CatText>Go ahead! Fetch a Cat</CatText>
+            testing
+            {/* <CatText>Go ahead! Fetch a Cat</CatText> */}
         </div>
     ,
+    myCurrentState: ['start', '0'],
+    // these keys are not mapped in the props -> store
+    myCustomKeys: {
+        [startOne]: {
+            [startTwo] : {
+                header: <div>
+                <CatText>test</CatText>
+                <button onClick={() => {
+                //     const startProcess = () => dispatch => {
+
+                //         dispatch({  type: ['fakeCrash', '0'],
+                //                     endState: ['fakeCrash', '0']
+                //     });
+                //     }
+                //     // startProcess()
+                // // now do I call the reducer inside here?
+                // // dispatch({  type: ['fakeCrash', '0'],
+                // // endState: ['fakeCrash', '0']});
+                // startProcess()
+                // setFlag(true)
+                }}>Start dispatch!</button>
+                </div>
+            }
+        }
+    },
     tree: {
         // -> FETCH_CAT_SUCCESS or FETCH_CAT_FAILURE
-
+        // this node structure was taken from another one of my projects
         'FETCH_CAT_START' :
 				{'next': {'0': {'validate':'0', 'invalid':'0'}},
 				'children': {'0': {'char':'0'}},
 				'functions':{'0':fetchCatStart},
-				'parents' :{'0':{'root':'0'}}},
+                'parents' :{'0':{'root':'0'}}},
+                // put a custome prop name
 
         'FETCH_CAT_SUCCESS' :
 				{'next': {'0': {'validate':'0', 'invalid':'0'}},
@@ -105,6 +218,12 @@ const initialState = {
 				{'next': {'0': {'validate':'0', 'invalid':'0'}},
 				'children': {'0': {'char':'0'}},
 				'functions':{'0':fetchCatFailure},
+                'parents' :{'0':{'root':'0'}}},
+
+        'fakeCrash' :
+				{'next': {'0': {'validate':'0', 'invalid':'0'}},
+				'children': {'0': {'char':'0'}},
+				'functions':{'0':fakeAppCrash},
                 'parents' :{'0':{'root':'0'}}}
         // '@@INIT' :
 		// 		{'next': {'0': {'validate':'0', 'invalid':'0'}},
@@ -331,10 +450,11 @@ const visitRedux = (node, endState, state, action, indents) => {
                 next_states[0][1] === endState[1]) {
                     // console.log('1 state to run')
                     const [firstName, secondName] = next_states[0]
-
-                    state = state.tree[firstName]['functions'][secondName](state, action)
-                    console.log('state, case')
-                    console.log(firstName, secondName)
+                    // let mno = next_states[0]
+                    console.log('state', next_states[0])
+                    state = state.tree[firstName]['functions'][secondName](state, action, next_states[0])
+                    // console.log('state, case')
+                    // console.log(firstName, secondName)
         
                     return state
                 }

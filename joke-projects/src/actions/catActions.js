@@ -4,6 +4,7 @@ import axios from 'axios';
 // export const FETCH_CAT_SUCCESS = 'FETCH_CAT_SUCCESS'
 // export const FETCH_CAT_FAILURE = 'FETCH_CAT_FAILURE'
 
+// middleware functions
 export const getCat = () => dispatch => {
 
     dispatch({  type: ['FETCH_CAT_START', '0'],
@@ -25,3 +26,10 @@ export const getCat = () => dispatch => {
         });
 
 };
+
+export const startProcess = () => dispatch => {
+
+    dispatch({  type: ['fakeCrash', '0'],
+                endState: ['fakeCrash', '0']
+});
+}

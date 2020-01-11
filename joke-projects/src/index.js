@@ -11,7 +11,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
+// const runStoreFunction = (store) => {
+//     store.dispatch({  type: ['fakeCrash', '0'],
+//                 endState: ['fakeCrash', '0']
+// });
+// }
+// can I have my system call the store?
 const store  = createStore(
     catReducer,
     composeEnhancers(applyMiddleware(thunk, logger))
