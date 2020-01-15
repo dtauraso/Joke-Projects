@@ -1,5 +1,5 @@
 import React from 'react'
-
+import axios from 'axios'
 const TestComponent = (props) => {
 
     return (
@@ -9,6 +9,13 @@ const TestComponent = (props) => {
             // where is the data from the state going to go?
             // setMyGraphState()
             // works
+            // let x = props.myGraphState
+            // axios
+            //     .get('https://aws.random.cat/meow')
+            //     .then(res => {
+            //         x.url = res.data.file
+            //     })
+            console.log('ran state')
             props.setMyGraphState()
             props.setArray()
             // my 'redux dispatch' call
