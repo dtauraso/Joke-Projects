@@ -5,7 +5,8 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 
-import catReducer from './reducers/catReducer'
+// import catReducer from './solutions/cat/catReducer'
+import universalReducer from './universalReducer'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -13,7 +14,7 @@ import * as serviceWorker from './serviceWorker';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store  = createStore(
-    catReducer,
+    universalReducer,
     composeEnhancers(applyMiddleware(thunk, logger))
 );
 

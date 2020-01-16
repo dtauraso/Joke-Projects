@@ -3,7 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
-import { getCat, startProcess } from '../actions/catActions';
+import { getCat, startProcess } from './catActions';
+import Header from '../../components/Header';
 
 const CatText = styled.p`
 
@@ -36,9 +37,10 @@ const GetCatButon = styled.button`
 const Cat = props => {
     
 
-
+    // console.log("my props", props)
     return (
         <div>
+            <Header />
             <CatHeader>Cat Image</CatHeader>
             {!props.cat && !props.isFetching && <CatText>Go ahead! Fetch a Cat</CatText>}
 
@@ -56,9 +58,9 @@ const Cat = props => {
 
 const mapStateToProps = state => {
     return {
-        error : state.error,
-        isFetching: state.isFetching,
-        cat: state.cat
+        error : state.catTree.error,
+        isFetching: state.catTree.isFetching,
+        cat: state.catTree.cat
 
     }
 }

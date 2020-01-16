@@ -22,17 +22,17 @@ import axios from 'axios';
 // middleware functions
 export const getCat = () => dispatch => {
 
-    dispatch({  type: ['FETCH_CAT_START', '0'] });
+    dispatch({  type: ['catTree', 'FETCH_CAT_START', '0'] });
 
     axios
         .get('https://aws.random.cat/meow')
         .then(res => {
             // console.log("from api", res.data.file)
-            dispatch({  type: ['FETCH_CAT_SUCCESS', '0'],
+            dispatch({  type: ['catTree', 'FETCH_CAT_SUCCESS', '0'],
                         payload: res.data.file });
         })
         .catch(err => {
-            dispatch({  type: ['FETCH_CAT_FAILURE', '0'],
+            dispatch({  type: ['catTree', 'FETCH_CAT_FAILURE', '0'],
                         payload: err.response })
         });
 
@@ -40,6 +40,16 @@ export const getCat = () => dispatch => {
 
 export const startProcess = () => dispatch => {
 
-    dispatch({  type: ['fakeCrash', '0'],
+    dispatch({  type: ['catTree', 'fakeCrash', '0'],
 });
+}
+// put in BreakAppActions
+export const breakApp = () => dispatch => {
+    // start fake infinite loop 1
+    // show message afterwards
+
+    // start fake infinite loop 1
+    // show message afterwards
+
+    // need 5 silly messages to happen every 50000 steps
 }
