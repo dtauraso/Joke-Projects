@@ -23,6 +23,11 @@ export const breakApp = () => dispatch => {
     // need 5 silly messages to happen every 50000 steps
 }
 
+export const resetApp = () => dispatch => {
+    console.log('here')
+    dispatch({ type: ['breakAppTree', 'reset', '0']})
+
+}
 
 export const startProcess = () => dispatch => {
 

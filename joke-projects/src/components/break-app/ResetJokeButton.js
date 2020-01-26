@@ -1,11 +1,13 @@
 import React from 'react'
 
 const ResetJokeButton = (props) => {
-    // console.log("reset", props)
-    const { className, message } = props.rest
+
+
+    const { className, message, resetApp } = props.rest
+
     return (
         <div>
-            <button className={className}>
+            <button className={className} onClick={() => resetApp()}>
                 {message}
             </button>
         </div>

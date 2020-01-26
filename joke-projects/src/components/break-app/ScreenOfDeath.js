@@ -10,7 +10,6 @@ const ScreenOfDeath = (props) => {
     const { className, messages } = props.rest
     return (
         <div className={className}>
-            {/* <p>screen of death</p> */}
             {messages.map((message, i) => (
                 
                 <HOCTestMessage
@@ -18,12 +17,11 @@ const ScreenOfDeath = (props) => {
                         key={i}
                         wait={(4*i+1) * 1000}
                         beforeTimer={"hidden"}
-                        afterTimer={""}
+                        afterTimer={"show"}
                         componentData={{message: message}}
                         component={TestMessage}
                     />
             ))}
-            {/* othe timers go in here */}
         </div>
     )
 }
