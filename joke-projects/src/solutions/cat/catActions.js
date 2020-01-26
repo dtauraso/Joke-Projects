@@ -38,18 +38,3 @@ export const getCat = () => dispatch => {
 
 };
 
-export const startProcess = () => dispatch => {
-
-    dispatch({  type: ['catTree', 'fakeCrash', '0'],
-});
-}
-// put in BreakAppActions
-export const breakApp = () => dispatch => {
-    // start fake infinite loop 1
-    // show message afterwards
-
-    // start fake infinite loop 1
-    // show message afterwards
-
-    // need 5 silly messages to happen every 50000 steps
-}

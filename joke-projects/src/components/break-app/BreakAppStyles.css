@@ -1,0 +1,4 @@
+/* changable css rule, so must be here */
+.hidden {
+	display: none;
+}

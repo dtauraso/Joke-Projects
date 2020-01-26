@@ -33,10 +33,6 @@ export const fetchCatFailure = (state, action) => {
     }
 }
 
-export const FakeAppCrash = (state, action) => {
-
-    return state
-}
 
 
 // reducers and the state for it in the same file
@@ -68,35 +64,6 @@ export const Cat = {
 				{'next': {'0': {}},
 				'children': {'0': {'char':'0'}},
 				'functions':{'0':fetchCatFailure}
-            },
-
-        'fakeCrash' :
-				{'next': {'0': {}},
-				'functions':{'0':FakeAppCrash}
             }
-            
-                
-        
-
     }
 }
-
-
-// const catReducer = (state = initialState, action) => {
-
-//     // console.log(action)
-//     if(typeof(action.type) === 'string') {
-//         return state
-//     }
-//     let [stateFirstName, context] = action.type
-
-//     if(!Object.keys(state.tree).includes(stateFirstName)) {
-//         return state
-//     }
-
-    
-//     return state.tree[stateFirstName]['functions'][context](state, action)
-
-// }
-
-// export default catReducer;

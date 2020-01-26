@@ -1,12 +1,14 @@
 import React from 'react';
-import Cat from './solutions/cat/Cat'
-// import BreakApp from './components/BreakApp'
 import './App.css';
+import Cat from './solutions/cat/Cat'
+import BreakApp from './components/break-app/BreakApp'
+
 function App() {
   return (
     <div className="App">
-      {/* <BreakApp /> */}
-      <Cat />
+      <BreakApp />
+      {/* <Cat /> */}
+      {/* <PrivateRoute path="/addNewFriend" component={AddNewFriend} /> */}
 
     </div>
   );

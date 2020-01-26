@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
-import { getCat, startProcess } from './catActions';
+import { getCat } from './catActions';
 import Header from '../../components/Header';
 
 const CatText = styled.p`
@@ -67,5 +67,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { getCat, startProcess }
+    { getCat }
 )(Cat)
