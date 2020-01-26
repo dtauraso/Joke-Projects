@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
@@ -10,6 +12,35 @@ import ScreenOfDeath from './ScreenOfDeath';
 import ResetJokeButton from './ResetJokeButton';
 import StartJokeButton from './StartJokeButton';
 import './BreakAppStyles.css'
+
+const useStyles = makeStyles({
+    button: {
+      background:
+        "linear-gradient(45deg, var(--background-start) 30%, var(--background-end) 90%)",
+      borderRadius: 3,
+      border: 0,
+      color: "white",
+      height: 48,
+      padding: "0 30px",
+      boxShadow: "0 3px 5px 2px var(--box-shadow)"
+    },
+    test: {
+      display: "none"
+    }
+  });
+
+const blue = {
+  "--background-start": "#2196F3",
+  "--background-end": "#21CBF3",
+  "--box-shadow": "rgba(33, 203, 243, .3)"
+};
+
+const defaultColor = {
+  "--background-start": "#FE6B8B",
+  "--background-end": "#FF8E53",
+  "--box-shadow": "rgba(255, 105, 135, .3)"
+};
+
 
 const BlueScreen = styled.div`
 
@@ -31,7 +62,21 @@ const ScreenOfDeathStyled = styled.div`
 
 
 // styled components and material ui
+export const DynamicCSSVAriables = (props) => {
 
+    return (
+        <div>
+            <Button
+                className={props.rest.className}
+                style={blue}
+            >
+                {props.rest.message}
+            </Button>
+        </div>
+    )
+}
+
+const NewComponent = HigherTestTimer({component: DynamicCSSVAriables})
 
 const HOCScreenOfDeath = HigherTestTimer({component: ScreenOfDeath})
 
@@ -40,28 +85,17 @@ const HOCResetJokeButton = HigherTestTimer({component: ResetJokeButton})
 
 
 // https://stackoverflow.com/questions/48458334/functions-are-not-valid-as-a-react-child-this-may-happen-if-you-return-a-compon
-// so react treats is like a component and not a funciton that returns a component
+// so react treats is like a component and not a function that returns a component
 
-/*
-timeline
-click button A
-A valishes instantly
-screen turns blue after x seconds
-lines come up y_i seconds later
-a button to reset joke to the right of message
-
-*/
 
 const BreakApp = props => {
     
-
+    const classes2 = useStyles()
+    console.log(classes2)
     // only can show things on the last triggered refresh
     return (
         // classname that changes after a timer is done
-        // regurlar blank style then blue screen after timer finishes
-        // put in a small button on the side letting the user refresh the page
         <div>
-            {/* put in some blue screen of death with windows error messages */}
             <Header />
             <BlueScreen>
                 <ScreenOfDeathStyled>
@@ -79,7 +113,7 @@ const BreakApp = props => {
                         <HOCResetJokeButton
                             wait={10000}
                             beforeTimer={"hidden"}
-                            afterTimer={""}
+                            afterTimer={classes2.button}
                             componentData={{message: 'reset', resetApp: props.resetApp}}
                             component={ResetJokeButton}
                         />
@@ -87,12 +121,11 @@ const BreakApp = props => {
                 </ScreenOfDeathStyled>
             </BlueScreen>
             {!props.isCrashing && 
-                <StartJokeButton breakApp={props.breakApp} />
+                <StartJokeButton
+                    breakApp={props.breakApp}
+                    styleName={classes2.button}/>
 
             }
-            
-            
-
         </div>
     )
 }

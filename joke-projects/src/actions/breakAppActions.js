@@ -24,7 +24,7 @@ export const breakApp = () => dispatch => {
 }
 
 export const resetApp = () => dispatch => {
-    console.log('here')
+    // console.log('here')
     dispatch({ type: ['breakAppTree', 'reset', '0']})
 
 }
