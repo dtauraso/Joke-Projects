@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "name": "Joke-Projects",
+    "builds": [{ "src": "joke-projects/package.json", "use": "@now/static-build", "config": {"distDir": "build"} }],
+    "routes": [
+    { "src": "/(.*)", "dest": "joke-projects/$1" }
+    ]
+    }
+    
