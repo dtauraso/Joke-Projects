@@ -13,6 +13,7 @@ import ResetJokeButton from './ResetJokeButton';
 import StartJokeButton from './StartJokeButton';
 import './BreakAppStyles.css'
 
+const marginSetting = {margin: "25px auto"}
 const useStyles = makeStyles({
     button: {
       background:
@@ -22,10 +23,15 @@ const useStyles = makeStyles({
       color: "white",
       height: 48,
       padding: "0 30px",
-      boxShadow: "0 3px 5px 2px var(--box-shadow)"
+      boxShadow: "0 3px 5px 2px var(--box-shadow)",
+      ...marginSetting
     },
     test: {
-      display: "none"
+        //   display: "none",
+        background: "white",
+        ...marginSetting,
+        
+        color: "white"
     }
   });
 
@@ -42,22 +48,24 @@ const defaultColor = {
 };
 
 
-const BlueScreen = styled.div`
-
-    width: 100%;
-    background: blue;
-`
-
 const ScreenOfDeathStyled = styled.div`
 
-    width: 65%;
+
+    width: 900px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+    // I seem to need to set a height or flex box just forces them together
 
     // margins are limited by the width
-    margin: auto 0 auto 35%
-    // border: 1px solid black;
+    margin: 0 auto;
+    margin-top: 50px;
+
+    @media only screen and (min-width: 414px) and (max-width: 767px) {
+        // width: 50%;
+        width: 400px;
+        margin: 0 auto;
+    }
 `
 
 
@@ -76,7 +84,6 @@ export const DynamicCSSVAriables = (props) => {
     )
 }
 
-const NewComponent = HigherTestTimer({component: DynamicCSSVAriables})
 
 const HOCScreenOfDeath = HigherTestTimer({component: ScreenOfDeath})
 
@@ -96,36 +103,35 @@ const BreakApp = props => {
     return (
         // classname that changes after a timer is done
         <div>
-            <Header />
-            <BlueScreen>
-                <ScreenOfDeathStyled>
-                    {props.isCrashing &&
-                        <HOCScreenOfDeath
-                        
-                            wait={10}
-                            beforeTimer={"hidden"}
-                            afterTimer={""}
-                            componentData={{messages: props.messages}}
-                            component={ScreenOfDeath}
-                        />
-                    }
-                    {props.isCrashing && 
-                        <HOCResetJokeButton
-                            wait={10000}
-                            beforeTimer={"hidden"}
-                            afterTimer={classes2.button}
-                            componentData={{message: 'reset', resetApp: props.resetApp}}
-                            component={ResetJokeButton}
-                        />
-                    }
-                </ScreenOfDeathStyled>
-            </BlueScreen>
+            {/* <Header /> */}
             {!props.isCrashing && 
                 <StartJokeButton
                     breakApp={props.breakApp}
                     styleName={classes2.button}/>
 
             }
+            <ScreenOfDeathStyled>
+                {props.isCrashing &&
+                    <HOCScreenOfDeath
+                    
+                        wait={10}
+                        beforeTimer={"hidden"}
+                        afterTimer={""}
+                        componentData={{messages: props.messages}}
+                        component={ScreenOfDeath}
+                    />
+                }
+                {props.isCrashing && 
+                    <HOCResetJokeButton
+                        wait={4300 * props.messages.length}
+                        beforeTimer={"hidden"}
+                        afterTimer={classes2.button}
+                        componentData={{message: 'reset', resetApp: props.resetApp}}
+                        component={ResetJokeButton}
+                    />
+                }
+            </ScreenOfDeathStyled>
+            
         </div>
     )
 }
